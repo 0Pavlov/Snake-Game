@@ -24,15 +24,18 @@ time, time_step = 0, 200
 clock = pygame.time.Clock()
 
 # Snake
-snake = pygame.rect.Rect([1, 1, CELL_SIZE - 2, CELL_SIZE - 2])
-segments = [snake.copy()]
+snake_head = pygame.Rect(1, 1, CELL_SIZE - 2, CELL_SIZE - 2)
+segments = [snake_head.copy()]
 length = 1
+
+"""test_surface = pygame.Surface((Window.x // GRID_DIMENSIONS[0], Window.y // GRID_DIMENSIONS[1]))  # TEST"""
 
 # Game loop
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
+
         # Input handling
         if event.type == pygame.KEYDOWN:
             pass
@@ -45,14 +48,9 @@ while True:
             pygame.draw.rect(screen, 'white', (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE), 1)
 
     # Draw a snake
-    [pygame.draw.rect(screen, 'green', segment) for segment in segments]
+    pygame.draw.rect(screen, pygame.Color('green'), snake_head)
 
     # Draw some things
-    """
-    # Move snake
-    time_now = pygame.time.get_ticks()
-    if time_now - time > time_step:
-        time = time_now
-    """
+
     pygame.display.update()
     clock.tick(60)
