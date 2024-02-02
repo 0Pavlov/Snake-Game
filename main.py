@@ -6,7 +6,7 @@ pygame.init()
 
 class Food:
     def __init__(self):
-        self.x = 0
+        self.x = 26
         self.y = 0
         self.pos = Vector2(self.x, self.y)
 
@@ -55,11 +55,6 @@ while True:
             pass
 
     screen.fill('black')
-
-    # Draw grid
-    for row in range(GRID_DIMENSIONS[1]):
-        for col in range(GRID_DIMENSIONS[0]):
-            pygame.draw.rect(screen, 'white', (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE), 1)
 
     # Draw a snake
     pygame.draw.rect(screen, pygame.Color('green'), snake_head)
