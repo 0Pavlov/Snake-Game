@@ -1,18 +1,17 @@
 import pygame
 from pygame.math import Vector2
-import random
 pygame.init()
 
 
 class Food:
     def __init__(self):
-        self.x = 26
-        self.y = 0
+        self.x = 19
+        self.y = 18
         self.pos = Vector2(self.x, self.y)
 
     def draw_food(self):
-        food = pygame.Rect(self.pos.x, self.pos.y, CELL_SIZE, CELL_SIZE)
-        pygame.draw.rect(screen, pygame.Color('red'), food)
+        food_rect = pygame.Rect(int(self.pos.x * CELL_SIZE), int(self.pos.y * CELL_SIZE), CELL_SIZE, CELL_SIZE)
+        pygame.draw.rect(screen, pygame.Color('red'), food_rect)
 
 
 # Game window
@@ -28,7 +27,7 @@ pygame.display.set_caption("Snake")
 
 # Grid
 CELL_SIZE = Window.x // 20
-GRID_DIMENSIONS = (20, 19)
+GRID_DIMENSIONS = (19, 18)
 
 # Food
 food = Food()
@@ -37,12 +36,6 @@ food = Food()
 time, time_step = 0, 200
 clock = pygame.time.Clock()
 
-# Snake
-snake_head = pygame.Rect(1, 1, CELL_SIZE - 2, CELL_SIZE - 2)
-segments = [snake_head.copy()]
-length = 1
-
-"""test_surface = pygame.Surface((Window.x // GRID_DIMENSIONS[0], Window.y // GRID_DIMENSIONS[1]))  # TEST"""
 
 # Game loop
 while True:
@@ -55,9 +48,6 @@ while True:
             pass
 
     screen.fill('black')
-
-    # Draw a snake
-    pygame.draw.rect(screen, pygame.Color('green'), snake_head)
 
     # Draw food
     food.draw_food()
