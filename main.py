@@ -1,12 +1,13 @@
 import pygame
+import random
 from pygame.math import Vector2
 pygame.init()
 
 
 class Food:
     def __init__(self):
-        self.x = 19
-        self.y = 18
+        self.x = random.randint(0, GRID_DIMENSIONS[0])
+        self.y = random.randint(0, GRID_DIMENSIONS[1])
         self.pos = Vector2(self.x, self.y)
 
     def draw_food(self):
@@ -36,7 +37,6 @@ food = Food()
 time, time_step = 0, 200
 clock = pygame.time.Clock()
 
-
 # Game loop
 while True:
     for event in pygame.event.get():
@@ -51,6 +51,5 @@ while True:
 
     # Draw food
     food.draw_food()
-
     pygame.display.update()
     clock.tick(60)
