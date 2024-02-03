@@ -15,6 +15,23 @@ class Food:
         pygame.draw.rect(screen, pygame.Color('red'), food_rect)
 
 
+class Score:
+    def __init__(self):
+        pygame.font.init()
+        self.score = 0
+        self.font = pygame.font.Font(None, 30)
+
+    def draw_score(self):
+        score_rect = pygame.Rect(0, (GRID_DIMENSIONS[1] + 1) * CELL_SIZE,
+                                 (GRID_DIMENSIONS[0] + 1) * CELL_SIZE, CELL_SIZE)
+        pygame.draw.rect(screen, (30, 30, 30), score_rect)
+        score_text = self.font.render(f"Score: {self.score}", True, (100, 100, 100))
+        screen.blit(score_text, (3, CELL_SIZE * GRID_DIMENSIONS[0] + 4))
+
+
+score = Score()
+
+
 # Game window
 class Window:
     def __init__(self, x_dimension, y_dimension):
@@ -49,7 +66,11 @@ while True:
 
     screen.fill('black')
 
+    # Draw score
+    score.draw_score()
+
     # Draw food
     food.draw_food()
+
     pygame.display.update()
     clock.tick(60)
