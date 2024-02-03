@@ -6,8 +6,8 @@ pygame.init()
 
 class Food:
     def __init__(self):
-        self.x = random.randint(0, GRID_DIMENSIONS[0])
-        self.y = random.randint(0, GRID_DIMENSIONS[1])
+        self.x = random.randint(0, GRID_DIMENSIONS[0] - 1)
+        self.y = random.randint(0, GRID_DIMENSIONS[1] - 1)
         self.pos = Vector2(self.x, self.y)
 
     def draw_food(self):
@@ -22,11 +22,11 @@ class Score:
         self.font = pygame.font.Font(None, 30)
 
     def draw_score(self):
-        score_rect = pygame.Rect(0, (GRID_DIMENSIONS[1] + 1) * CELL_SIZE,
-                                 (GRID_DIMENSIONS[0] + 1) * CELL_SIZE, CELL_SIZE)
+        score_rect = pygame.Rect(0, (GRID_DIMENSIONS[1]) * CELL_SIZE,
+                                 (GRID_DIMENSIONS[0]) * CELL_SIZE, CELL_SIZE)
         pygame.draw.rect(screen, (30, 30, 30), score_rect)
         score_text = self.font.render(f"Score: {self.score}", True, (100, 100, 100))
-        screen.blit(score_text, (3, CELL_SIZE * GRID_DIMENSIONS[0] + 4))
+        screen.blit(score_text, (3, CELL_SIZE * (GRID_DIMENSIONS[0] - 1) + 4))
 
 
 score = Score()
@@ -45,7 +45,7 @@ pygame.display.set_caption("Snake")
 
 # Grid
 CELL_SIZE = Window.x // 20
-GRID_DIMENSIONS = (19, 18)
+GRID_DIMENSIONS = (20, 19)
 
 # Food
 food = Food()
