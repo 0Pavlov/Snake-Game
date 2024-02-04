@@ -3,17 +3,16 @@ import random
 from pygame.math import Vector2
 pygame.init()
 
-down = Vector2(0, 1)  # TEST
+
 class Snake:
     def __init__(self):
         self.body = [Vector2(4, 2), Vector2(5, 2), Vector2(6, 2)]
-        self.direction = down  # TEST
+        self.direction = Vector2(0, 0)
 
     def draw_snake(self):
         for x, y in enumerate(self.body):
             snake_rect = pygame.Rect(int(y[0] * CELL_SIZE), int(y[1] * CELL_SIZE), CELL_SIZE - 1, CELL_SIZE - 1)
             pygame.draw.rect(screen, pygame.Color('Green'), snake_rect)
-
 
     def move_snake(self):
         body_copy = self.body[:-1]
@@ -68,6 +67,17 @@ pygame.display.set_caption("Snake")
 CELL_SIZE = Window.x // 20
 GRID_DIMENSIONS = (20, 19)
 
+UP = 'up'
+LEFT = 'left'
+DOWN = 'down'
+RIGHT = 'right'
+controls = {
+            UP: pygame.K_w,
+            LEFT: pygame.K_a,
+            DOWN: pygame.K_s,
+            RIGHT: pygame.K_d
+           }
+
 # Food
 food = Food()
 
@@ -89,7 +99,14 @@ while True:
 
         # Input handling
         if event.type == pygame.KEYDOWN:
-            pass
+            if event.key == controls[UP]:
+                snake.direction = Vector2(0, -1)
+            if event.key == controls[LEFT]:
+                snake.direction = Vector2(-1, 0)
+            if event.key == controls[DOWN]:
+                snake.direction = Vector2(0, 1)
+            if event.key == controls[RIGHT]:
+                snake.direction = Vector2(1, 0)
 
     screen.fill('black')
 
