@@ -7,6 +7,9 @@ pygame.init()
 class Snake:
     def __init__(self):
         self.body = [Vector2(4, 2), Vector2(5, 2), Vector2(6, 2)]
+        self.length = len(self.body)
+        self.up, self.down = Vector2(0, -1), Vector2(0, 1)
+        self.left, self.right = Vector2(-1, 0), Vector2(1, 0)
         self.direction = Vector2(0, 0)
 
     def draw_snake(self):
@@ -67,16 +70,6 @@ pygame.display.set_caption("Snake")
 CELL_SIZE = Window.x // 20
 GRID_DIMENSIONS = (20, 19)
 
-UP = 'up'
-LEFT = 'left'
-DOWN = 'down'
-RIGHT = 'right'
-controls = {
-            UP: pygame.K_w,
-            LEFT: pygame.K_a,
-            DOWN: pygame.K_s,
-            RIGHT: pygame.K_d
-           }
 
 # Food
 food = Food()
@@ -99,13 +92,13 @@ while True:
 
         # Input handling
         if event.type == pygame.KEYDOWN:
-            if event.key == controls[UP]:
+            if event.key == pygame.K_w and snake.direction != snake.down and snake.length > 1:
                 snake.direction = Vector2(0, -1)
-            if event.key == controls[LEFT]:
+            if event.key == pygame.K_a and snake.direction != snake.right and snake.length > 1:
                 snake.direction = Vector2(-1, 0)
-            if event.key == controls[DOWN]:
+            if event.key == pygame.K_s and snake.direction != snake.up and snake.length > 1:
                 snake.direction = Vector2(0, 1)
-            if event.key == controls[RIGHT]:
+            if event.key == pygame.K_d and snake.direction != snake.left and snake.length > 1:
                 snake.direction = Vector2(1, 0)
 
     screen.fill('black')
