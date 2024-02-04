@@ -75,11 +75,17 @@ food = Food()
 time, time_step = 0, 200
 clock = pygame.time.Clock()
 
+SCREEN_UPDATE = pygame.USEREVENT
+pygame.time.set_timer(SCREEN_UPDATE, 150)
+
 # Game loop
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
+
+        if event.type == SCREEN_UPDATE:
+            snake.move_snake()
 
         # Input handling
         if event.type == pygame.KEYDOWN:
@@ -89,7 +95,6 @@ while True:
 
     # Draw snake
     snake.draw_snake()
-    snake.move_snake()  # TEST
 
     # Draw score
     score.draw_score()
