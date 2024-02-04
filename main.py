@@ -8,8 +8,12 @@ class Snake:
     def __init__(self):
         self.body = [Vector2(4, 2), Vector2(5, 2), Vector2(6, 2)]
         self.length = len(self.body)
+
+        # Possible directions
         self.up, self.down = Vector2(0, -1), Vector2(0, 1)
         self.left, self.right = Vector2(-1, 0), Vector2(1, 0)
+
+        # Current direction
         self.direction = Vector2(0, 0)
 
     def draw_snake(self):
