@@ -4,6 +4,16 @@ from pygame.math import Vector2
 pygame.init()
 
 
+class Snake:
+    def __init__(self):
+        self.body = [Vector2(4, 2), Vector2(5, 2), Vector2(6, 2)]
+
+    def draw_snake(self):
+        for x, y in enumerate(self.body):
+            snake_rect = pygame.Rect(int(y[0] * CELL_SIZE), int(y[1] * CELL_SIZE), CELL_SIZE - 1, CELL_SIZE - 1)
+            pygame.draw.rect(screen, pygame.Color('Green'), snake_rect)
+
+
 class Food:
     def __init__(self):
         self.x = random.randint(0, GRID_DIMENSIONS[0] - 1)
@@ -29,6 +39,10 @@ class Score:
         screen.blit(score_text, (3, CELL_SIZE * (GRID_DIMENSIONS[0] - 1) + 4))
 
 
+# Snake
+snake = Snake()
+
+# Score
 score = Score()
 
 
@@ -65,6 +79,9 @@ while True:
             pass
 
     screen.fill('black')
+
+    # Draw snake
+    snake.draw_snake()
 
     # Draw score
     score.draw_score()
