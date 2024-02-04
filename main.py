@@ -3,15 +3,22 @@ import random
 from pygame.math import Vector2
 pygame.init()
 
-
+down = Vector2(0, 1)  # TEST
 class Snake:
     def __init__(self):
         self.body = [Vector2(4, 2), Vector2(5, 2), Vector2(6, 2)]
+        self.direction = down  # TEST
 
     def draw_snake(self):
         for x, y in enumerate(self.body):
             snake_rect = pygame.Rect(int(y[0] * CELL_SIZE), int(y[1] * CELL_SIZE), CELL_SIZE - 1, CELL_SIZE - 1)
             pygame.draw.rect(screen, pygame.Color('Green'), snake_rect)
+
+
+    def move_snake(self):
+        body_copy = self.body[:-1]
+        body_copy.insert(0, body_copy[0] + self.direction)
+        self.body = body_copy
 
 
 class Food:
@@ -82,6 +89,7 @@ while True:
 
     # Draw snake
     snake.draw_snake()
+    snake.move_snake()  # TEST
 
     # Draw score
     score.draw_score()
