@@ -34,21 +34,21 @@ class Food:
         self.pos = Vector2(self.x, self.y)
 
     def draw_food(self):
-        food_rect = pygame.Rect(int(self.pos.x * CELL_SIZE), int(self.pos.y * CELL_SIZE), CELL_SIZE, CELL_SIZE)
+        food_rect = pygame.Rect(int(self.pos.x * CELL_SIZE), int(self.pos.y * CELL_SIZE), CELL_SIZE - 1, CELL_SIZE - 1)
         pygame.draw.rect(screen, pygame.Color((113, 84, 255)), food_rect)
 
 
 class Score:
     def __init__(self):
         pygame.font.init()
-        self.score = 0
+        self.value = 0
         self.font = pygame.font.Font(None, 30)
 
     def draw_score(self):
         score_rect = pygame.Rect(0, (GRID_DIMENSIONS[1]) * CELL_SIZE,
                                  (GRID_DIMENSIONS[0]) * CELL_SIZE, CELL_SIZE)
         pygame.draw.rect(screen, (69, 50, 182), score_rect)
-        score_text = self.font.render(f"Score: {self.score}", True, (19, 12, 56))
+        score_text = self.font.render(f"Score: {self.value}", True, (19, 12, 56))
         screen.blit(score_text, (3, CELL_SIZE * (GRID_DIMENSIONS[0] - 1) + 4))
 
 
@@ -56,17 +56,20 @@ class Main:
     def __init__(self):
         self.snake = Snake()
         self.food = Food()
+        self.score = Score()
 
     def update(self):
         self.snake.move_snake()
+        self.collision()
 
     def draw_elements(self):
         self.food.draw_food()
         self.snake.draw_snake()
+        self.score.draw_score()
 
-
-# Score
-score = Score()
+    def collision(self):
+        if self.food.pos == self.snake.body[0]:
+            self.score.value += 15
 
 
 # Game window
@@ -122,9 +125,6 @@ while True:
                 main_game.snake.direction = Vector2(1, 0)
 
     screen.fill((7, 4, 24))
-
-    # Draw score
-    score.draw_score()
 
     main_game.draw_elements()
 
