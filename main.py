@@ -8,6 +8,7 @@ class Snake:
     def __init__(self):
         self.body = [Vector2(4, 2), Vector2(5, 2), Vector2(6, 2)]
         self.length = len(self.body)
+        self.eat = False
 
         # Possible directions
         self.up, self.down = Vector2(0, -1), Vector2(0, 1)
@@ -22,9 +23,18 @@ class Snake:
             pygame.draw.rect(screen, pygame.Color((39, 27, 107)), snake_rect)
 
     def move_snake(self):
-        body_copy = self.body[:-1]
-        body_copy.insert(0, body_copy[0] + self.direction)
-        self.body = body_copy
+        if self.eat:
+            body_copy = self.body[:]
+            body_copy.insert(0, body_copy[0] + self.direction)
+            self.body = body_copy
+            self.eat = False
+        else:
+            body_copy = self.body[:-1]
+            body_copy.insert(0, body_copy[0] + self.direction)
+            self.body = body_copy
+
+    def grow(self):
+        self.eat = True
 
 
 class Food:
@@ -77,6 +87,7 @@ class Main:
         if self.food.pos == self.snake.body[0]:
             self.score.value += 15
             self.food.respawn()
+            self.snake.grow()
             if self.food_in_snake:
                 self.food.respawn()
 
