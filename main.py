@@ -37,6 +37,11 @@ class Food:
         food_rect = pygame.Rect(int(self.pos.x * CELL_SIZE), int(self.pos.y * CELL_SIZE), CELL_SIZE - 1, CELL_SIZE - 1)
         pygame.draw.rect(screen, pygame.Color((113, 84, 255)), food_rect)
 
+    def respawn(self):
+        self.x = random.randint(0, GRID_DIMENSIONS[0] - 1)
+        self.y = random.randint(0, GRID_DIMENSIONS[1] - 1)
+        self.pos = Vector2(self.x, self.y)
+
 
 class Score:
     def __init__(self):
@@ -70,6 +75,7 @@ class Main:
     def collision(self):
         if self.food.pos == self.snake.body[0]:
             self.score.value += 15
+            self.food.respawn()
 
 
 # Game window
