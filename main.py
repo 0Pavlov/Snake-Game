@@ -19,7 +19,7 @@ class Snake:
     def draw_snake(self):
         for x, y in enumerate(self.body):
             snake_rect = pygame.Rect(int(y[0] * CELL_SIZE), int(y[1] * CELL_SIZE), CELL_SIZE - 1, CELL_SIZE - 1)
-            pygame.draw.rect(screen, pygame.Color('Green'), snake_rect)
+            pygame.draw.rect(screen, pygame.Color((39, 27, 107)), snake_rect)
 
     def move_snake(self):
         body_copy = self.body[:-1]
@@ -35,7 +35,7 @@ class Food:
 
     def draw_food(self):
         food_rect = pygame.Rect(int(self.pos.x * CELL_SIZE), int(self.pos.y * CELL_SIZE), CELL_SIZE, CELL_SIZE)
-        pygame.draw.rect(screen, pygame.Color('red'), food_rect)
+        pygame.draw.rect(screen, pygame.Color((113, 84, 255)), food_rect)
 
 
 class Score:
@@ -47,8 +47,8 @@ class Score:
     def draw_score(self):
         score_rect = pygame.Rect(0, (GRID_DIMENSIONS[1]) * CELL_SIZE,
                                  (GRID_DIMENSIONS[0]) * CELL_SIZE, CELL_SIZE)
-        pygame.draw.rect(screen, (30, 30, 30), score_rect)
-        score_text = self.font.render(f"Score: {self.score}", True, (100, 100, 100))
+        pygame.draw.rect(screen, (69, 50, 182), score_rect)
+        score_text = self.font.render(f"Score: {self.score}", True, (19, 12, 56))
         screen.blit(score_text, (3, CELL_SIZE * (GRID_DIMENSIONS[0] - 1) + 4))
 
 
@@ -121,7 +121,7 @@ while True:
                     main_game.snake.direction != main_game.snake.left and main_game.snake.length > 1):
                 main_game.snake.direction = Vector2(1, 0)
 
-    screen.fill('black')
+    screen.fill((7, 4, 24))
 
     # Draw score
     score.draw_score()
