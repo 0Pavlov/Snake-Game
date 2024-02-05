@@ -8,6 +8,7 @@ class Snake:
     def __init__(self):
         self.body = [Vector2(4, 2), Vector2(5, 2), Vector2(6, 2)]
         self.length = len(self.body)
+        self.head = self.body[0]
 
         # Possible directions
         self.up, self.down = Vector2(0, -1), Vector2(0, 1)
