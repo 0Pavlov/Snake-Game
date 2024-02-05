@@ -6,7 +6,7 @@ pygame.init()
 
 class Snake:
     def __init__(self):
-        self.body = [Vector2(4, 2), Vector2(5, 2), Vector2(6, 2)]
+        self.body = [Vector2(4, 2), Vector2(3, 2), Vector2(2, 2)]
         self.length = len(self.body)
         self.eat = False
 
@@ -76,6 +76,7 @@ class Main:
     def update(self):
         self.snake.move_snake()
         self.collision()
+        self.border()
 
     def draw_elements(self):
         self.food.draw_food()
@@ -89,6 +90,16 @@ class Main:
             self.snake.grow()
         if self.food.pos in self.snake.body:
             self.food.respawn()
+
+    def border(self):
+        if self.snake.body[0][0] > GRID_DIMENSIONS[0]:
+            self.snake.body[0][0] = 0
+        if self.snake.body[0][0] < 0:
+            self.snake.body[0][0] = GRID_DIMENSIONS[0]
+        if self.snake.body[0][1] > GRID_DIMENSIONS[1]:
+            self.snake.body[0][1] = 0
+        if self.snake.body[0][1] < 0:
+            self.snake.body[0][1] = GRID_DIMENSIONS[1]
 
 
 # Game window
