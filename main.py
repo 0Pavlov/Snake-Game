@@ -72,7 +72,6 @@ class Main:
         self.snake = Snake()
         self.food = Food()
         self.score = Score()
-        self.food_in_snake = self.food.pos in self.snake.body
 
     def update(self):
         self.snake.move_snake()
@@ -88,8 +87,8 @@ class Main:
             self.score.value += 15
             self.food.respawn()
             self.snake.grow()
-            if self.food_in_snake:
-                self.food.respawn()
+        if self.food.pos in self.snake.body:
+            self.food.respawn()
 
 
 # Game window
