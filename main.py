@@ -15,7 +15,7 @@ class Snake:
         self.left, self.right = Vector2(-1, 0), Vector2(1, 0)
 
         # Current direction
-        self.direction = Vector2(0, 0)
+        self.direction = Vector2(1, 0)
 
     def draw_snake(self):
         for x, y in enumerate(self.body):
