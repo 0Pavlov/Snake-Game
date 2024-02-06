@@ -6,7 +6,8 @@ pygame.init()
 
 class Snake:
     def __init__(self):
-        self.body = [Vector2(4, 2), Vector2(3, 2), Vector2(2, 2)]
+        self.head = Vector2(random.randint(0, GRID_DIMENSIONS[0] - 1), random.randint(0, GRID_DIMENSIONS[1] - 1))
+        self.body = [self.head, self.head - Vector2(1, 0)]
         self.length = len(self.body)
         self.eat = False
 
@@ -91,7 +92,7 @@ class Main:
         if self.food.pos in self.snake.body:
             self.food.respawn()
         if self.snake.body[0] in self.snake.body[1:]:
-            self.snake.body = [Vector2(4, 2), Vector2(3, 2), Vector2(2, 2)]
+            self.snake.body = [self.snake.head, self.snake.head - Vector2(1, 0)]
             self.snake.direction = Vector2(1, 0)
             self.score.value = 0
             self.food.respawn()
