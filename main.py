@@ -91,7 +91,10 @@ class Main:
         if self.food.pos in self.snake.body:
             self.food.respawn()
         if self.snake.body[0] in self.snake.body[1:]:
-            print("Self collision")
+            self.snake.body = [Vector2(4, 2), Vector2(3, 2), Vector2(2, 2)]
+            self.snake.direction = Vector2(1, 0)
+            self.score.value = 0
+            self.food.respawn()
 
     def border(self):
         if self.snake.body[0].x > GRID_DIMENSIONS[0]:
