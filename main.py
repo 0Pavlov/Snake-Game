@@ -90,6 +90,8 @@ class Main:
             self.snake.grow()
         if self.food.pos in self.snake.body:
             self.food.respawn()
+        if self.snake.body[0] in self.snake.body[1:]:
+            print("Self collision")
 
     def border(self):
         if self.snake.body[0].x > GRID_DIMENSIONS[0]:
