@@ -7,7 +7,7 @@ pygame.init()
 class Snake:
     def __init__(self):
         self.head = Vector2(random.randint(0, GRID_DIMENSIONS[0] - 1), random.randint(0, GRID_DIMENSIONS[1] - 1))
-        self.body = [self.head, self.head - Vector2(1, 0)]
+        self.body = [self.head]
         self.length = len(self.body)
         self.eat = False
 
@@ -29,6 +29,9 @@ class Snake:
             body_copy.insert(0, body_copy[0] + self.direction)
             self.body = body_copy
             self.eat = False
+        elif len(self.body) == 1:
+            body_copy = [self.body[0] + self.direction]
+            self.body = body_copy
         else:
             body_copy = self.body[:-1]
             body_copy.insert(0, body_copy[0] + self.direction)
@@ -145,19 +148,27 @@ while True:
         # Input handling
         if event.type == pygame.KEYDOWN:
             if (event.key == pygame.K_w and  # Check if opposite direction and having a body
-                    main_game.snake.direction != main_game.snake.down and main_game.snake.length > 1):
+                    main_game.snake.direction != main_game.snake.down and len(main_game.snake.body) > 1):
+                main_game.snake.direction = Vector2(0, -1)
+            elif event.key == pygame.K_w and len(main_game.snake.body) == 1:
                 main_game.snake.direction = Vector2(0, -1)
 
             if (event.key == pygame.K_a and  # Check if opposite direction and having a body
-                    main_game.snake.direction != main_game.snake.right and main_game.snake.length > 1):
+                    main_game.snake.direction != main_game.snake.right and len(main_game.snake.body) > 1):
+                main_game.snake.direction = Vector2(-1, 0)
+            elif event.key == pygame.K_a and len(main_game.snake.body) == 1:
                 main_game.snake.direction = Vector2(-1, 0)
 
             if (event.key == pygame.K_s and  # Check if opposite direction and having a body
-                    main_game.snake.direction != main_game.snake.up and main_game.snake.length > 1):
+                    main_game.snake.direction != main_game.snake.up and len(main_game.snake.body) > 1):
+                main_game.snake.direction = Vector2(0, 1)
+            elif event.key == pygame.K_s and len(main_game.snake.body) == 1:
                 main_game.snake.direction = Vector2(0, 1)
 
             if (event.key == pygame.K_d and  # Check if opposite direction and having a body
-                    main_game.snake.direction != main_game.snake.left and main_game.snake.length > 1):
+                    main_game.snake.direction != main_game.snake.left and len(main_game.snake.body) > 1):
+                main_game.snake.direction = Vector2(1, 0)
+            elif event.key == pygame.K_d and len(main_game.snake.body) == 1:
                 main_game.snake.direction = Vector2(1, 0)
 
     screen.fill((7, 4, 24))
