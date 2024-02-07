@@ -95,8 +95,8 @@ class Main:
         if self.food.pos in self.snake.body:
             self.food.respawn()
         if self.snake.body[0] in self.snake.body[1:]:
-            self.snake.body = [self.snake.head, self.snake.head - Vector2(1, 0)]
-            self.snake.direction = Vector2(1, 0)
+            self.snake.body = [self.snake.head]
+            self.snake.direction = Vector2(0, 0)
             self.score.value = 0
             self.food.respawn()
 
