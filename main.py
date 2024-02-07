@@ -98,11 +98,11 @@ class Main:
             self.food.respawn()
 
     def border(self):
-        if self.snake.body[0].x > GRID_DIMENSIONS[0]:
+        if self.snake.body[0].x > GRID_DIMENSIONS[0] - 1:
             self.snake.body[0].x = 0
         if self.snake.body[0].x < 0:
             self.snake.body[0].x = GRID_DIMENSIONS[0]
-        if self.snake.body[0].y > GRID_DIMENSIONS[1]:
+        if self.snake.body[0].y > GRID_DIMENSIONS[1] - 1:
             self.snake.body[0].y = 0
         if self.snake.body[0].y < 0:
             self.snake.body[0].y = GRID_DIMENSIONS[1]
