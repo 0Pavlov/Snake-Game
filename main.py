@@ -8,7 +8,6 @@ class Snake:
     def __init__(self):
         self.head = Vector2(random.randint(0, GRID_DIMENSIONS[0] - 1), random.randint(0, GRID_DIMENSIONS[1] - 1))
         self.body = [self.head]
-        self.length = len(self.body)
         self.eat = False
 
         # Possible directions
