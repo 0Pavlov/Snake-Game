@@ -17,24 +17,36 @@ class Snake:
         # Current direction
         self.direction = Vector2(0, 0)
 
+        # Delay before move (affects snake's speed)
+        self.move_delay = 200
+        self.time = 0
+
+    def delta_time(self):
+        time_now = pygame.time.get_ticks()
+        if time_now - self.time > self.move_delay:
+            self.time = time_now
+            return True
+        return False
+
     def draw_snake(self):
         for x, y in enumerate(self.body):
             snake_rect = pygame.Rect(int(y[0] * CELL_SIZE), int(y[1] * CELL_SIZE), CELL_SIZE - 1, CELL_SIZE - 1)
             pygame.draw.rect(screen, pygame.Color((39, 27, 107)), snake_rect)
 
     def move_snake(self):
-        if self.eat:
-            body_copy = self.body[:]
-            body_copy.insert(0, body_copy[0] + self.direction)
-            self.body = body_copy
-            self.eat = False
-        elif len(self.body) == 1:
-            body_copy = [self.body[0] + self.direction]
-            self.body = body_copy
-        else:
-            body_copy = self.body[:-1]
-            body_copy.insert(0, body_copy[0] + self.direction)
-            self.body = body_copy
+        if self.delta_time():
+            if self.eat:
+                body_copy = self.body[:]
+                body_copy.insert(0, body_copy[0] + self.direction)
+                self.body = body_copy
+                self.eat = False
+            elif len(self.body) == 1:
+                body_copy = [self.body[0] + self.direction]
+                self.body = body_copy
+            else:
+                body_copy = self.body[:-1]
+                body_copy.insert(0, body_copy[0] + self.direction)
+                self.body = body_copy
 
     def grow(self):
         self.eat = True
@@ -103,11 +115,11 @@ class Main:
         if self.snake.body[0].x > GRID_DIMENSIONS[0] - 1:
             self.snake.body[0].x = 0
         if self.snake.body[0].x < 0:
-            self.snake.body[0].x = GRID_DIMENSIONS[0]
+            self.snake.body[0].x = GRID_DIMENSIONS[0] - 1
         if self.snake.body[0].y > GRID_DIMENSIONS[1] - 1:
             self.snake.body[0].y = 0
         if self.snake.body[0].y < 0:
-            self.snake.body[0].y = GRID_DIMENSIONS[1]
+            self.snake.body[0].y = GRID_DIMENSIONS[1] - 1
 
 
 # Game window
