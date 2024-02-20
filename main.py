@@ -18,7 +18,7 @@ class Snake:
         self.direction = Vector2(0, 0)
 
         # Delay before move (affects snake's speed)
-        self.move_delay = 200
+        self.move_delay = 150
         self.time = 0
 
     def delta_time(self):
@@ -100,12 +100,15 @@ class Main:
 
     def collision(self):
         if self.food.pos == self.snake.body[0]:
+            if self.snake.move_delay > 50:
+                self.snake.move_delay -= 1
             self.score.value += 15
             self.food.respawn()
             self.snake.grow()
         if self.food.pos in self.snake.body:
             self.food.respawn()
         if self.snake.body[0] in self.snake.body[1:]:
+            self.snake.move_delay = 150
             self.snake.body = [self.snake.head]
             self.snake.direction = Vector2(0, 0)
             self.score.value = 0
@@ -143,7 +146,7 @@ time, time_step = 0, 200
 clock = pygame.time.Clock()
 
 SCREEN_UPDATE = pygame.USEREVENT
-pygame.time.set_timer(SCREEN_UPDATE, 150)
+pygame.time.set_timer(SCREEN_UPDATE, 50)
 
 main_game = Main()
 
