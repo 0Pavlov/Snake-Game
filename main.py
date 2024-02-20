@@ -142,11 +142,10 @@ GRID_DIMENSIONS = (20, 19)
 
 
 # Game speed
-time, time_step = 0, 200
 clock = pygame.time.Clock()
 
 SCREEN_UPDATE = pygame.USEREVENT
-pygame.time.set_timer(SCREEN_UPDATE, 50)
+pygame.time.set_timer(SCREEN_UPDATE, 1)
 
 main_game = Main()
 
