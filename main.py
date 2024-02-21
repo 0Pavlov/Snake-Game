@@ -72,14 +72,14 @@ class Food:
 class Score:
     def __init__(self):
         self.value = 0
-        self.font = pygame.font.Font(None, 30)
+        self.font = pygame.font.Font(None, Window.y // 16)
 
     def draw_score(self):
         score_rect = pygame.Rect(0, (GRID_DIMENSIONS[1]) * CELL_SIZE,
                                  (GRID_DIMENSIONS[0]) * CELL_SIZE, CELL_SIZE)
         pygame.draw.rect(screen, (69, 50, 182), score_rect)
         score_text = self.font.render(f"Score: {self.value}", True, (19, 12, 56))
-        screen.blit(score_text, (3, CELL_SIZE * (GRID_DIMENSIONS[0] - 1) + 4))
+        screen.blit(score_text, (3, CELL_SIZE * (GRID_DIMENSIONS[0] - 1) + Window.y // 120))
 
 
 class Main:
