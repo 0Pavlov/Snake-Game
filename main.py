@@ -157,7 +157,7 @@ class Window:
         self.y = y_dimension
 
 
-Window = Window(500, 500)
+Window = Window(700, 700)
 screen = pygame.display.set_mode(size=(Window.x, Window.y), vsync=1)
 pygame.display.set_caption("Snake")
 
