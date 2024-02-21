@@ -2,6 +2,7 @@ import pygame
 import random
 from pygame.math import Vector2
 pygame.init()
+pygame.font.init()
 
 
 class Snake:
@@ -70,7 +71,6 @@ class Food:
 
 class Score:
     def __init__(self):
-        pygame.font.init()
         self.value = 0
         self.font = pygame.font.Font(None, 30)
 
@@ -180,11 +180,11 @@ while True:
         if event.type == pygame.QUIT:
             exit()
 
-        if event.type == SCREEN_UPDATE:
-            main_game.update()
-
         if event.type == pygame.KEYDOWN:
             main_game.handle_input()
+
+        if event.type == SCREEN_UPDATE:
+            main_game.update()
 
     screen.fill((7, 4, 24))
 
